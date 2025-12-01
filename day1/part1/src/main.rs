@@ -3,7 +3,7 @@ use std::io::{self, BufRead};
 
 fn main() -> io::Result<()> {
     // Open the "input.txt" file
-    let file = File::open("input.txt")?;
+    let file = File::open("../input.txt")?;
     let reader = io::BufReader::new(file);
 
     let mut current_pos = 50;
