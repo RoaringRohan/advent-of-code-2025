@@ -23,16 +23,26 @@ fn main() -> io::Result<()> {
         // Update the current position based on direction
         match direction {
             'R' => {
+                let start = current_pos % 100;
+                let first_k = if start == 0 { 100 } else { 100 - start };
+
+                if num >= first_k {
+                    pointed_at_zero += 1 + (num - first_k) / 100;
+                }
+
                 current_pos = (current_pos + num) % 100;
             }
             'L' => {
+                let start = current_pos % 100;
+                let first_k = if start == 0 { 100 } else { start };
+
+                if num >= first_k {
+                    pointed_at_zero += 1 + (num - first_k) / 100;
+                }
+
                 current_pos = (current_pos - (num % 100) + 100) % 100;
             }
             _ => panic!("Invalid direction")
-        }
-
-        if current_pos == 0 {
-            pointed_at_zero += 1;
         }
     }
 
