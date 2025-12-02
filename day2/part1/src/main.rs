@@ -2,7 +2,7 @@ use std::fs;
 
 fn main() {
     // Save entire txt file as a single string
-    let content = fs::read_to_string("input.txt")
+    let content = fs::read_to_string("../input.txt")
         .expect("Should have been able to read the file");
 
     let mut sum: u64 = 0;
