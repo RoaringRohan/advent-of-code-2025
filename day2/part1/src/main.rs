@@ -17,11 +17,19 @@ fn main() {
 
             // 'start..=end' includes both the start and the end number
             for num in start..=end {
+                // Convert to string
                 let string = num.to_string();
+
+                // Find length of string
                 let length = string.len();
+
+                // Checking if length of string is even
                 if length % 2 == 0 {
+                    // Split string into two halves
                     let mid = length / 2;
                     let (first_half, second_half) = string.split_at(mid);
+                    
+                    // Compare both halves, if equal add to sum
                     if first_half == second_half {
                         sum += num;
                     }
