@@ -6,10 +6,11 @@ fn main() {
 
     let lines: Vec<&str> = content.lines().collect();
 
-    // Pad lines to make a perfect rectangle
+    // Finding longest line length
     let max_len = lines.iter().map(|l| l.len()).max().unwrap_or(0);
     let mut grid: Vec<Vec<char>> = Vec::new();
 
+    // Making sure every row will have the same length by adding spaces to shorter-length rows
     for line in lines {
         let mut row: Vec<char> = line.chars().collect();
         // Pad with spaces to the right if shorter
@@ -19,11 +20,12 @@ fn main() {
         grid.push(row);
     }
 
-    // The operator is in the last row
+    // Find operation
     let last_row_idx = grid.len() - 1;
+
     let mut grand_total: i64 = 0;
 
-    // Identify Problem Blocks
+    // Identify each block of cephalopod questions
     let mut block_ranges: Vec<(usize, usize)> = Vec::new();
     let mut start_col = 0;
     
@@ -31,6 +33,7 @@ fn main() {
         // Check if column 'x' is a separator (all spaces in the number rows)
         let is_separator = (0..last_row_idx).all(|y| grid[y][x] == ' ');
 
+        // If it is separating a block, then add the range of the block to a vector
         if is_separator {
             if x > start_col {
                 block_ranges.push((start_col, x));
@@ -43,7 +46,7 @@ fn main() {
         block_ranges.push((start_col, max_len));
     }
 
-    // Process Blocks
+    // Process each block (set of ranges) to compute mathematical operations
     for (start, end) in block_ranges {
         // Find the operator for this block
         let mut op_char = '+';
@@ -55,11 +58,10 @@ fn main() {
             }
         }
 
-        // Initialize total
+        // Initialize if using multiplication, division to 1 else 0
         let mut problem_total: i64 = if op_char == '*' || op_char == '/' { 1 } else { 0 };
 
-        // Read columns right-to-left
-        // The range is start..end. We reverse it to go right-to-left.
+        // Read columns right-to-left (left to right but in reverse)
         for x in (start..end).rev() {
             let mut digits = String::new();
 
@@ -72,7 +74,6 @@ fn main() {
             }
 
             if !digits.is_empty() {
-                // The digits are already in MSD order (top-to-bottom)
                 let num: i64 = digits.parse().unwrap();
                 
                 match op_char {
