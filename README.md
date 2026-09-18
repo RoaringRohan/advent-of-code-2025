@@ -4,6 +4,8 @@ Solutions to [Advent of Code 2025](https://adventofcode.com/2025), written in Ru
 
 **23 solutions across 12 days** — both parts for days 1 through 11, and part one of day 12.
 
+![The 2025 calendar after day 12 — two stars on every day solved](assets/screenshots/advent-of-code-2025-calendar.png)
+
 ## No dependencies
 
 Every solution is **pure Rust standard library**. Across all 23 crates the only entries in any
